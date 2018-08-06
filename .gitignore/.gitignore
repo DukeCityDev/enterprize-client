@@ -1,9 +1,0 @@
-.DS_STORE
-/.sync-config.cson
-/.idea
-/node_modules
-/typings
-/vendor
-/public_html/dist
-/public_html/index.php
-/npm-debug.log
