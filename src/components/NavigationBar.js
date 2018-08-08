@@ -1,8 +1,8 @@
 import React,{Component} from "react";
-import {ListItemText,ListItem,IconButton,Toolbar,Button,AppBar,Drawer,List,Divider} from "@material-ui/core";
+import {ListItemIcon,ListItemText,ListItem,IconButton,Toolbar,Button,AppBar,Drawer,List,Divider} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
+import SendIcon from '@material-ui/icons/Send';
 
 export default class NavigationBar extends Component{
 
@@ -16,7 +16,7 @@ export default class NavigationBar extends Component{
 
     styles = {
         drawer:{
-            width : "30vw",
+            //width : "30vw",
         },
         listItem:{
             textAlign:"center"
@@ -40,8 +40,8 @@ export default class NavigationBar extends Component{
         return (
             <AppBar position={"static"} color={"primary"}>
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Menu">
-                        <MenuIcon onClick={sideMenuOpen} />
+                    <IconButton onClick={sideMenuOpen} color="inherit" aria-label="Menu">
+                        <MenuIcon />
                     </IconButton>
                 </Toolbar>
                 <Drawer open={sideMenuOpened} onClose={sideMenuClose}>
@@ -53,32 +53,53 @@ export default class NavigationBar extends Component{
                     >
                         <div style={this.styles.drawer}>
                             <List>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem} />
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="My Shifts" />
                                 </ListItem>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem}/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="My Coverages"/>
                                 </ListItem>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem}/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="Pod Shifts" />
                                 </ListItem>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem}/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="Find Scon" />
                                 </ListItem>
-                            </List>
-                            <Divider />
-                            <List>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem}/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="Open Coverages" />
                                 </ListItem>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem}/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="Open Giveaways" />
                                 </ListItem>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem} />
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="Bug Tracker" />
                                 </ListItem>
-                                <ListItem>
-                                    <ListItemText inset primary="Sent mail" style={this.styles.listItem}/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <SendIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="Sent mail" />
                                 </ListItem>
                             </List>
                         </div>
