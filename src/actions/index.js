@@ -7,7 +7,6 @@ const rootUrl = "https://sconsdocdev.unm.edu/public_html/api";
 
 export function getScon(){
     const request = axios.get(`${rootUrl}/scon`);
-
     return{
         type: GET_SCON,
         payload: request

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {sconReducer} from "./SconReducer";
+import sconReducer from "./SconReducer";
 
 const rootReducer = combineReducers({
     scon: sconReducer
