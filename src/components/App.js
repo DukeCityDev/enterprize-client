@@ -6,7 +6,7 @@ import {MuiThemeProvider} from "@material-ui/core"
 import {getScon} from "../actions";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-
+import DesktopCalendar from "./calendar/DesktopCalendar";
 
 class App extends Component{
 
@@ -27,9 +27,11 @@ class App extends Component{
             <div>
                 <MuiThemeProvider theme={theme}>
                     <NavigationBar color={'primary'}/>
-                    <Typography variant="display4" gutterBottom>
+                    <Typography variant="display2" gutterBottom>
                         Greetings {firstName} {lastName}
                     </Typography>
+                    <DesktopCalendar/>
+                    <DesktopCalendar doubleshift={true}/>
                 </MuiThemeProvider>
             </div>
 
