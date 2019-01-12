@@ -1,32 +1,58 @@
+const path = require('path');
+//const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
-    entry: ['./src/index.js'],
-    output: {
-        path: __dirname,
-        publicPath: '/',
-        filename: 'bundle.js'
+    mode: "development",
+    // plugins: [
+    //     new HardSourceWebpackPlugin(),
+    //     new BundleAnalyzerPlugin({
+    //          analyzerHost : "0.0.0.0"
+    //      })
+    // ],
+    entry: {
+        client : ['./src/index.tsx']
     },
+    //   devtool: 'inline-source-map',
     module: {
-        loaders: [
+        rules: [
             {
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015', 'stage-1']
-                }
+                test: /\.tsx?$/,
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                            experimentalWatchApi: true,
+                        },
+                    },
+                ],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
             }
         ]
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: [ '.tsx', '.ts', '.js' ]
     },
-    devServer: {
-        inline: true,
-        port: 3000,
-        historyApiFallback: true,
-        contentBase: './',
-        watchOptions: {
-            aggregateTimeout: 300,
-            poll: 1000
-        }
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
+    },
+    watchOptions: {
+        poll: true
     }
+
 };
