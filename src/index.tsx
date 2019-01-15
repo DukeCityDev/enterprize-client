@@ -6,15 +6,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import Home from "./components/Home";
-
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+//test
+const store = createStore(reducers,applyMiddleware(thunk));
 
 // just for testing
 
 
 ReactDOM.render(
 
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
         <BrowserRouter>
             <div>
                 <Switch>

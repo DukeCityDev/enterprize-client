@@ -4,13 +4,17 @@ export const GET_SCON = 'GET_SCON';
 const rootUrl = "https://sconsdocdev.unm.edu/public_html/api";
 
 
-export function getScon(){
-    //TODO: THIS WILL ONLY WORK ONCE REDUX THUNK IS IMPLEMENTED
 
+export const getScon = ()=>{
+    return async function(dispatch,getState){
 
-    const request = axios.get(`${rootUrl}/scon`);
-    return{
-        type: GET_SCON,
-        payload: request
+        await axios.get(`${rootUrl}/scon`)
+            .then(result=>{
+                dispatch({type : GET_SCON, payload : result.data});
+            })
+            .catch(error=>{
+                dispatch({type : GET_SCON,payload : {error}})
+        });
+
     }
-}
+};

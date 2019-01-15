@@ -3,6 +3,10 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getScon} from "../actions";
 
+interface Scon {
+
+}
+
 interface State{
 
 }
@@ -23,10 +27,13 @@ class Home extends React.Component<Props,State>{
     }
 
     render(){
+        console.log("PROPS");
         console.log(this.props.scon);
         return (
             <div>
                 Hello World!
+
+                {(this.props.scon.netId ? this.props.scon.netId : 'Undefined')}
             </div>
         )
     }
