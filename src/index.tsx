@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import Home from "./components/Home";
+import '../styles/main.scss';
 //test
 const store = createStore(reducers,applyMiddleware(thunk));
 

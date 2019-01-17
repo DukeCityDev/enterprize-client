@@ -1,0 +1,32 @@
+$cherry : #ba0c2f;
+$silver : #a7a8aa;
+$darkgrey : #333333;
+$lobogray : #63666a;
+
+@font-face {
+  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/Lobo.woff");
+  font-family: Lobo;
+}
+
+
+nav{
+  background-color: $cherry;
+  color: white;
+  display: flex;
+  align-items : center;
+  justify-content: space-between;
+  padding : 2.5vh 5vw;
+
+  #center-nav-item{
+    justify-self: center;
+  }
+
+  .nav-item{
+      a{
+        display : block;
+        text-align: center;
+        text-decoration: none;
+        font-family: Lobo;
+      }
+  }
+}

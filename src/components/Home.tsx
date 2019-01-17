@@ -2,13 +2,23 @@ import * as React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {getScon} from "../actions";
+import Navigation from "./navigation/Navigation"
+import SideMenu from "./navigation/SideMenu";
 
-interface Scon {
-
+export interface Scon {
+    adminStatus : boolean,
+    email : string,
+    firstName : string,
+    lastName : string,
+    middleInitial : string,
+    netId : number,
+    sconId : number,
+    startDate : Date
 }
 
-interface State{
 
+interface State{
+    sideMenuOn : boolean
 }
 
 interface Props{
@@ -20,20 +30,29 @@ interface Props{
 class Home extends React.Component<Props,State>{
     constructor(props){
         super(props);
+        //@ts-ignore
+        this.state={
+            sideMenuOn : false
+        }
     }
 
     componentWillMount(){
         this.props.getScon();
     }
 
+    handleMenuClick = ()=>{
+        console.log("clicked");
+        this.setState({sideMenuOn : !(this.state.sideMenuOn)});
+        console.log(this.state);
+    };
+
     render(){
-        console.log("PROPS");
-        console.log(this.props.scon);
+        const {sideMenuOn} = this.state;
+
         return (
             <div>
-                Hello World!
-
-                {(this.props.scon.netId ? this.props.scon.netId : 'Undefined')}
+                <Navigation scon={this.props.scon} handleMenuClick={this.handleMenuClick.bind(this)}/>
+                <SideMenu sideMenuOn={this.state.sideMenuOn}/>
             </div>
         )
     }
