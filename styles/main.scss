@@ -4,8 +4,28 @@ $darkgrey : #333333;
 $lobogray : #63666a;
 
 @font-face {
-  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/Lobo.woff");
-  font-family: Lobo;
+  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseBlack.woff");
+  font-family: VitesseBlack;
+}
+
+@font-face {
+  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseBold.woff");
+  font-family: VitesseBold;
+}
+
+@font-face {
+  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseMedium.woff");
+  font-family: VitesseMedium;
+}
+
+@font-face {
+  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseLight.woff");
+  font-family: VitesseLight;
+}
+
+@font-face {
+  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseMedium.woff");
+  font-family: VitesseMedium;
 }
 
 
@@ -26,7 +46,16 @@ nav{
         display : block;
         text-align: center;
         text-decoration: none;
-        font-family: Lobo;
+        font-family: VitesseMedium;
+
       }
   }
+}
+
+#side-menu{
+  height: 101vh;
+  position: fixed;
+  width : 0%;
+  background-color: $cherry;
+  transition: width .5s ;
 }

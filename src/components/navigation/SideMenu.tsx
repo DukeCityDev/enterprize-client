@@ -14,6 +14,12 @@ export default class SideMenu extends React.Component<Props,State>{
     }
 
     render(){
-        return (<b>Test: {this.props.sideMenuOn}</b>)
+
+        const width = this.props.sideMenuOn ? "33.33%" : "0%";
+        return (
+            <div id={"side-menu"} style={{width}} >
+
+            </div>
+        )
     }
 }
