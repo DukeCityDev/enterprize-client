@@ -47,7 +47,6 @@ nav{
         text-align: center;
         text-decoration: none;
         font-family: VitesseMedium;
-
       }
   }
 }
@@ -59,3 +58,25 @@ nav{
   background-color: $cherry;
   transition: width .5s ;
 }
+
+
+#calendar-container{
+  display: flex;
+  justify-content: center;
+}
+
+#calendar-full-size{
+  table-layout : auto;
+  width : 85%;
+}
+
+
+
+
+
+
+
+
+
+
+

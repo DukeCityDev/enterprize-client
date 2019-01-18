@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getScon} from "../actions";
 import Navigation from "./navigation/Navigation"
 import SideMenu from "./navigation/SideMenu";
+import Calendar from "./calendar/Calendar";
 
 export interface Scon {
     adminStatus : boolean,
@@ -51,8 +52,9 @@ class Home extends React.Component<Props,State>{
 
         return (
             <div>
-                <Navigation scon={this.props.scon} handleMenuClick={this.handleMenuClick.bind(this)}/>
+                <Navigation scon={this.props.scon} sectionName={"Home"} handleMenuClick={this.handleMenuClick.bind(this)}/>
                 <SideMenu sideMenuOn={this.state.sideMenuOn}/>
+                <Calendar/>
             </div>
         )
     }

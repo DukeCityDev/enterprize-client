@@ -3,7 +3,8 @@ import {Scon} from "../Home";
 
 interface Props{
     handleMenuClick(),
-    scon : Scon
+    scon : Scon,
+    sectionName : string
 }
 
 interface State{
@@ -22,7 +23,7 @@ export default class Navigation extends React.Component<Props,State>{
         return (
         <nav className={"red-background"} id={'navigation-bar'}>
             <div onClick={this.props.handleMenuClick} className={"nav-item"} style={{float : "left"}}><a>Menu</a></div>
-            <div className={"nav-item"} id={"center-nav-item"}><a>Section Name</a></div>
+            <div className={"nav-item"} id={"center-nav-item"}><a>{this.props.sectionName}</a></div>
             <div className={"nav-item"} style={{float : "left"}}><a>{this.props.scon.firstName} {this.props.scon.lastName}</a></div>
         </nav>
         );

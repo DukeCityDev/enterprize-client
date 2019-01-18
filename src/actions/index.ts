@@ -18,3 +18,17 @@ export const getScon = ()=>{
 
     }
 };
+
+export const getShiftsByShiftPlanId = (id : number)=>{
+    return async function(dispatch,getState){
+
+        await axios.get(`${rootUrl}/Shift`)
+            .then(result=>{
+                dispatch({type : GET_SCON, payload : result.data});
+            })
+            .catch(error=>{
+                dispatch({type : GET_SCON,payload : {error}})
+            });
+
+    }
+};
