@@ -1,7 +1,7 @@
 import * as React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {getScon} from "../actions";
+import {getScon,getShiftsByShiftPlanId} from "../actions";
 import Navigation from "./navigation/Navigation"
 import SideMenu from "./navigation/SideMenu";
 import Calendar from "./calendar/Calendar";
@@ -24,7 +24,8 @@ interface State{
 
 interface Props{
     scon : any,
-    getScon()
+    getScon(),
+    getShiftsByShiftPlanId(id : number)
 }
 
 
@@ -39,6 +40,7 @@ class Home extends React.Component<Props,State>{
 
     componentWillMount(){
         this.props.getScon();
+        this.props.getShiftsByShiftPlanId(2);
     }
 
     handleMenuClick = ()=>{
@@ -60,18 +62,15 @@ class Home extends React.Component<Props,State>{
     }
 }
 
-
-
-
 function mapStateToProps(state){
     return {
-        scon: state.scon
+        scon: state.scon,
+        schedule : state.schedule
     }
 }
 
 const mapDispatchToProps = (dispatch)=>{
-
-    return bindActionCreators({getScon},dispatch);
+    return bindActionCreators({getScon,getShiftsByShiftPlanId},dispatch);
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Home);
