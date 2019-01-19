@@ -23,7 +23,15 @@ export const getShiftsByShiftPlanId = (id : number)=>{
     return async function(dispatch,getState){
         await axios.get(`${rootUrl}/Shift?ShiftPlanId=${id}`)
             .then(result=>{
-                dispatch({type : GET_SHIFTS, payload : result.data});
+
+                let scheduleArray = [];
+                if(result.data.data){
+                    scheduleArray = Object.keys(result.data.data).map((key)=>{
+                        return result.data.data[key];
+                    });
+                }
+
+                dispatch({type : GET_SHIFTS, payload : scheduleArray});
             })
             .catch(error=>{
                 dispatch({type : GET_SHIFTS,payload : {error}})

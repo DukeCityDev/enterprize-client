@@ -5,25 +5,15 @@ import {getScon,getShiftsByShiftPlanId} from "../actions";
 import Navigation from "./navigation/Navigation"
 import SideMenu from "./navigation/SideMenu";
 import Calendar from "./calendar/Calendar";
-
-export interface Scon {
-    adminStatus : boolean,
-    email : string,
-    firstName : string,
-    lastName : string,
-    middleInitial : string,
-    netId : number,
-    sconId : number,
-    startDate : Date
-}
-
+import {Scon, Shift} from "../interfaces";
 
 interface State{
     sideMenuOn : boolean
 }
 
 interface Props{
-    scon : any,
+    scon : Scon,
+    schedule : Array<Shift>,
     getScon(),
     getShiftsByShiftPlanId(id : number)
 }
@@ -44,19 +34,18 @@ class Home extends React.Component<Props,State>{
     }
 
     handleMenuClick = ()=>{
-        console.log("clicked");
         this.setState({sideMenuOn : !(this.state.sideMenuOn)});
-        console.log(this.state);
     };
 
     render(){
+        console.log(this.props);
         const {sideMenuOn} = this.state;
 
         return (
             <div>
                 <Navigation scon={this.props.scon} sectionName={"Home"} handleMenuClick={this.handleMenuClick.bind(this)}/>
                 <SideMenu sideMenuOn={this.state.sideMenuOn}/>
-                <Calendar/>
+                <Calendar shifts = {this.props.schedule}/>
             </div>
         )
     }

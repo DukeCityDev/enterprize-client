@@ -1,8 +1,8 @@
 import * as React from "react";
-import axios from "axios";
+import {Shift} from "../../interfaces";
 
 interface Props{
-
+    shifts : Array<Shift>
 }
 
 interface State{
