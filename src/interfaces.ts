@@ -12,10 +12,23 @@ export interface Scon {
 export interface Shift{
     shiftId : number,
     available : boolean|number,
-    startDate : string,
-    endDateS : string,
+    startDate :  {
+        date : Date;
+    }
+    endDate : {
+        date: Date;
+    },
     podId : number,
     sconNetId: string,
     shiftPlanName: string
+}
 
+export interface doubleShift{
+    monday: boolean;
+    tuesday: boolean;
+    wednesday: boolean;
+    thursday: boolean;
+    friday: boolean;
+    saturday: boolean;
+    sunday: boolean;
 }

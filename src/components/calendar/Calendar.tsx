@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Shift} from "../../interfaces";
+import CalendarDesktop from "./CalendarDesktop";
 
 interface Props{
     shifts : Array<Shift>
@@ -15,13 +16,9 @@ export default class Calendar extends React.Component<Props,State>{
     }
 
     render(){
-        return(
+        return (
             <div id={"calendar-container"}>
-                <table id={"calendar-full-size"}>
-                    <th>
-                        Ayyyyy
-                    </th>
-                </table>
+                <CalendarDesktop shifts={this.props.shifts} />
             </div>
         )
     }
