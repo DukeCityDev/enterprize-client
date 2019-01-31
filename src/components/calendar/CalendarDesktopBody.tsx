@@ -16,5 +16,11 @@ export default class CalendarDesktopBody extends React.Component<Props,State> {
         super(props);
     }
 
+    render(){
+        return (
+            <tbody>
 
+            </tbody>
+        )
+    }
 }

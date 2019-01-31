@@ -2,6 +2,7 @@ import * as React from "react";
 import {Shift, doubleShift} from "../../interfaces";
 import {doubleShiftMapper} from "./CalendarUtils";
 import CalendarDesktopHeader from "./CalendarDesktopHeader";
+import CalendarDesktopBody from "./CalendarDesktopBody";
 
 interface Props {
     shifts : Array<Shift>
@@ -40,9 +41,7 @@ export default class CalendarDesktop extends React.Component<Props,State> {
                 <thead>
                     <CalendarDesktopHeader showTime={true} doubleShifts={this.state.doubleShifts}/>
                 </thead>
-                <tbody className={"calendar-body"}>
-
-                </tbody>
+                <CalendarDesktopBody showTime={true} doubleShifts={this.state.doubleShifts} />
             </table>
         );
     }

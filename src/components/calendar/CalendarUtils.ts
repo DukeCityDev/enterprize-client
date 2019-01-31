@@ -69,3 +69,7 @@ export const doubleShiftMapper = (shifts: Array<Shift>): doubleShift => {
     });
     return doubleShiftObject;
 }
+
+export const timeMapper = (shifts: Array<Shift>) => {
+
+};
