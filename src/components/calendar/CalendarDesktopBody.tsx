@@ -39,12 +39,13 @@ export default class CalendarDesktopBody extends React.Component<Props,State> {
         this.setState({shifts : weekTimes});
     }
 
-
     render(){
         console.log(this.state.shifts);
         return (
             <tbody>
+                <tr>
 
+                </tr>
             </tbody>
         )
     }
