@@ -1,4 +1,4 @@
-import {doubleShift, Shift} from "../../interfaces";
+import {doubleShift, Shift, WeekTimes} from "../../interfaces";
 
 
 const timeOverlap = (startDate1, endDate1, startDate2,endDate2)=>{
@@ -39,7 +39,6 @@ export const doubleShiftMapper = (shifts: Array<Shift>): doubleShift => {
                 let startDate2 = new Date(shifts[i].startDate.date);
                 let endDate2 = new Date(shifts[i].endDate.date);
                 const day = timeOverlap(startDate,endDate,startDate2, endDate2);
-                console.log("Day: "+day);
                 switch(day){
                     case 0:
                         doubleShiftObject.sunday = true;
@@ -70,6 +69,74 @@ export const doubleShiftMapper = (shifts: Array<Shift>): doubleShift => {
     return doubleShiftObject;
 }
 
-export const timeMapper = (shifts: Array<Shift>) => {
+const timeSort = (shift1: Shift, shift2: Shift) => {
+    const shift1StartTime = new Date(shift1.startDate.date);
+    const shift2StartTime = new Date(shift2.startDate.date);
 
+    if(shift1StartTime > shift2StartTime){
+        return 1;
+    } else if(shift1StartTime < shift2StartTime){
+        return -1
+    } else{
+        return 0
+    }
+};
+
+
+export const timeMapper = (shifts: Array<Shift>): WeekTimes => {
+
+    const weekTimesObject: WeekTimes = {
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: [],
+        saturday: [],
+        sunday: [],
+        timeMap: {
+            startTimes: [],
+            endTimes: []
+        }
+    };
+
+    shifts.forEach(shift=>{
+        const shiftStartDate = new Date(shift.startDate.date);
+        const shiftEndDate = new Date(shift.endDate.date);
+
+        weekTimesObject.timeMap.startTimes.push(shiftStartDate);
+        weekTimesObject.timeMap.startTimes.push(shiftEndDate);
+
+        switch(shiftStartDate.getDay()){
+            case 0:
+                weekTimesObject.sunday.push(shift);
+                break;
+            case 1:
+                weekTimesObject.monday.push(shift);
+                break;
+            case 2:
+                weekTimesObject.tuesday.push(shift);
+                break;
+            case 3:
+                weekTimesObject.wednesday.push(shift);
+                break;
+            case 4:
+                weekTimesObject.thursday.push(shift);
+                break;
+            case 5:
+                weekTimesObject.friday.push(shift);
+                break;
+            case 6:
+                weekTimesObject.saturday.push(shift);
+                break;
+        }
+    });
+
+    weekTimesObject.sunday.sort(timeSort);
+    weekTimesObject.monday.sort(timeSort);
+    weekTimesObject.tuesday.sort(timeSort);
+    weekTimesObject.wednesday.sort(timeSort);
+    weekTimesObject.thursday.sort(timeSort);
+    weekTimesObject.friday.sort(timeSort);
+    weekTimesObject.saturday.sort(timeSort);
+    return weekTimesObject;
 };

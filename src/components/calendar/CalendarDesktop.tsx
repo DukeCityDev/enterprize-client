@@ -34,14 +34,14 @@ export default class CalendarDesktop extends React.Component<Props,State> {
     }
 
     render(){
-        const shifts = this.props;
+        const {shifts} = this.props;
 
         return (
             <table id={"calendar-full-size"}>
                 <thead>
                     <CalendarDesktopHeader showTime={true} doubleShifts={this.state.doubleShifts}/>
                 </thead>
-                <CalendarDesktopBody showTime={true} doubleShifts={this.state.doubleShifts} />
+                <CalendarDesktopBody showTime={true} doubleShifts={this.state.doubleShifts} shifts={shifts}/>
             </table>
         );
     }

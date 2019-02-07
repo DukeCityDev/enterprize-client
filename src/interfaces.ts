@@ -32,3 +32,19 @@ export interface doubleShift{
     saturday: boolean;
     sunday: boolean;
 }
+
+export interface WeekTimes{
+    monday: Array<Shift>;
+    tuesday: Array<Shift>;
+    wednesday: Array<Shift>;
+    thursday: Array<Shift>;
+    friday: Array<Shift>;
+    saturday: Array<Shift>;
+    sunday: Array<Shift>;
+    timeMap: TimeMap;
+}
+
+export interface TimeMap {
+    startTimes: Array<Date>;
+    endTimes: Array<Date>
+}
