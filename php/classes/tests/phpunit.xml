@@ -1,0 +1,17 @@
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="Scheduler 2.0">
+            <file>SconTest.php</file>
+            <file>PodTest.php</file>
+            <file>ShiftPlanTest.php</file>
+            <file>ShiftTest.php</file>
+
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">/var/www/html/php/classes/</directory>
+        </whitelist>
+    </filter>
+
+</phpunit>

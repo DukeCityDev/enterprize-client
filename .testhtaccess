@@ -1,0 +1,82 @@
+SetEnv HTTPS "on"
+AddCharset UTF-8 .php
+AuthType CAS
+CASScope /
+
+require user deaton747
+require user Jsedillo1
+require user aburel
+require user aguilarl
+require user alexandermkinney
+require user aolivaresrodriguez
+require user bastage
+require user bbaker07
+require user blackice
+require user boohera
+require user cchock
+require user crbailey2506
+require user crystalujan
+require user ealexand
+require user esilesky
+require user frairer
+require user fvaleio
+require user genelyse
+require user ghavelkagonzalez
+require user gmaldonado
+require user hearjace
+require user hedumtay
+require user ionavernon
+require user jahowell
+require user jgpacheco
+require user jlevandoski
+require user jlopez92
+require user jmccall2
+require user joseph
+require user jpando76
+require user jsedillo1
+require user jthomas105
+require user kbrockme
+require user kmccully
+require user krithika
+require user ljudkins
+require user luok150
+require user lwingerd
+require user mgauba
+require user mgriego9
+require user mhuss2
+require user mingl
+require user mkhalil
+require user mmiller23
+require user mmm2376
+require user msmuir
+require user mtadesse
+require user nssabol
+require user pchavez23
+require user presilla
+require user rafaelr3
+require user randall
+require user rnorthcu
+require user rodgerss
+require user rsousa
+require user salog17
+require user shockley
+require user sifrancis93
+require user soh98
+require user synorris
+require user tbui
+require user think
+require user tkvking
+require user spmcdow
+require user ddurland
+require user nvialpan
+require user trjohn
+require user bschlomann
+require user binod514278
+require user drivera3
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php71” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php71 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
