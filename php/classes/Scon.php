@@ -112,7 +112,7 @@ class Scon implements \JsonSerializable
 
     public function setMiddleInitial(?string $middleInitial) : void
     {
-        if(!is_null($middleInitial)){
+        if(!is_null($middleInitial) && strlen($middleInitial) !== 0){
             if(strlen($middleInitial) !== 1){
                 throw new \OutOfRangeException("Middle Initial must only be one character.");
             }
@@ -253,7 +253,7 @@ class Scon implements \JsonSerializable
 
         $netId = trim($netId);
         $netId = filter_var($netId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);;
-        $query = "SELECT sconId,  firstName, lastName, middleInitial,netId, email,phoneNumber, startDate, adminStatus FROM scon WHERE netId = :netId";
+        $query = "SELECT sconId,  firstName, lastName, middleInitial, netId, email,phoneNumber, startDate, adminStatus FROM scon WHERE netId = :netId";
         $statement = $pdo->prepare($query);
         $parameters = ["netId"=> $netId];
         $statement->execute($parameters);
@@ -280,7 +280,7 @@ class Scon implements \JsonSerializable
 
     public static function getSconBySconId(\PDO $pdo, int $sconId){
 
-        $query = "SELECT sconId,  firstName, lastName, middleInitial,netId, email,phoneNumber, startDate, adminStatus FROM scon WHERE sconId = :sconId";
+        $query = "SELECT sconId,  firstName, lastName, middleInitial, netId, email,phoneNumber, startDate, adminStatus FROM scon WHERE sconId = :sconId";
         $statement = $pdo->prepare($query);
         $parameters = ["sconId"=> $sconId];
         $statement->execute($parameters);
@@ -326,7 +326,7 @@ class Scon implements \JsonSerializable
     }
 
     public function jsonSerialize() {
-        $fields = ["sconId"=>$this->getSconId(), "firstName"=> $this->getFirstName(), "lastName"=>$this->getLastName(),"middleInitial"=>$this->getMiddleInitial(),"email"=>$this->getEmail(),"netId"=>$this->getSconId(),"phoneNumber"=>$this->getPhoneNumber(), "startDate"=>$this->getStartDate(),"adminStatus"=>$this->getAdminStatus()];
+        $fields = ["sconId"=>$this->getSconId(), "firstName"=> $this->getFirstName(), "lastName"=>$this->getLastName(),"middleInitial"=>$this->getMiddleInitial(),"email"=>$this->getEmail(),"netId"=>$this->getNetId(),"phoneNumber"=>$this->getPhoneNumber(), "startDate"=>$this->getStartDate(),"adminStatus"=>$this->getAdminStatus()];
         return ($fields);
     }
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import {Shift} from "../../interfaces";
 import CalendarDesktopTable from "./CalendarDesktopTable";
 import CalendarModal from "./CalendarModal";
+import DraggableDesktopTable from "./DraggableDesktopTable";
 
 interface Props{
     shifts : Array<Shift>,
@@ -18,7 +19,7 @@ interface State{
     modalShift: Shift|null|undefined;
 }
 
-export default class Calendar extends React.Component<Props,State>{
+export default class DraggableCalendar extends React.Component<Props,State>{
     constructor(props){
         super(props);
         this.state = {
@@ -41,7 +42,7 @@ export default class Calendar extends React.Component<Props,State>{
                 {this.state.modalOpen ? <CalendarModal pods={this.props.pods} modelAction={this.shiftModel.bind(this)} shift={this.state.modalShift} /> : null}
                 { this.props.switch ? <h1 style={{alignSelf: "center", cursor:"pointer", fontSize:64, marginRight: 10}} onClick={() => this.props.switcher("backward")}> {'<'} </h1>: null}
 
-                <CalendarDesktopTable modalAction={this.shiftModel.bind(this)} showDays={this.props.showDays} showTime={false} shifts={this.props.shifts} showScon={this.props.showScon} showPod={this.props.showPod} pods={this.props.pods}/>
+                <DraggableDesktopTable modalAction={this.shiftModel.bind(this)} showDays={this.props.showDays} showTime={false} shifts={this.props.shifts} showScon={this.props.showScon} showPod={this.props.showPod} pods={this.props.pods}/>
                 { this.props.switch ? <h1 style={{alignSelf: "center", cursor:"pointer", fontSize:64, marginLeft: 10}} onClick={() => this.props.switcher("forward")}> {'>'} </h1>: null}
             </div>
         )

@@ -4,14 +4,15 @@ export interface Scon {
     firstName : string,
     lastName : string,
     middleInitial : string,
-    netId : number,
+    netId : string,
     sconId : number,
-    startDate : Date
+    startDate : Date,
+    phoneNumber: string|number;
 }
 
 export interface Shift{
     shiftId : number,
-    available : boolean|number,
+    available : boolean,
     startDate :  {
         date : Date;
     }
@@ -21,6 +22,9 @@ export interface Shift{
     podId : number,
     sconNetId: string,
     shiftPlanName: string
+    showStartDate?: boolean;
+    showEndDate?: boolean;
+    priorEndDate?: any;
 }
 
 export interface doubleShift{

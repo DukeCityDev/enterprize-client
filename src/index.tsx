@@ -7,6 +7,10 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import Home from "./components/Home";
 import '../styles/main.scss';
+import PodSchedule from "./components/PodSchedule";
+import WeekdaySchedule from "./components/WeekdaySchedule";
+import Scons from "./components/Scon/Scons";
+import MakeSchedule from "./components/MakeSchedule";
 //test
 const store = createStore(reducers,applyMiddleware(thunk));
 
@@ -19,7 +23,19 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Switch>
-                    <Route path="/" component={Home} />
+                    <Route exact path="/weekday" component={WeekdaySchedule} />
+                </Switch>
+                <Switch>
+                    <Route exact path="/pods" component={PodSchedule} />
+                </Switch>
+                <Switch>
+                    <Route exact path="/scons" component={Scons} />
+                </Switch>
+                <Switch>
+                    <Route exact path="/make-schedule" component={MakeSchedule} />
+                </Switch>
+                <Switch>
+                    <Route exact path="/sconsdocdev" component={Home} />
                 </Switch>
             </div>
         </BrowserRouter>

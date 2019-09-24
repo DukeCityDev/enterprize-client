@@ -1,7 +1,7 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    //ini_set('display_errors', 1);
+    //ini_set('display_startup_errors', 1);
+    //error_reporting(E_ALL);
 
     require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
     require_once dirname(__DIR__, 3) . "/db/PdoGetter.php";
@@ -23,20 +23,28 @@ try {
     // sanitize input
     // make sure the id is valid for methods that require it
     if($method === "GET") {
-
-        $netId = $_SERVER['REDIRECT_REMOTE_USER'];
-        if(!empty($netId)){
-            $scons = Scon::getSconByNetId($pdo,"deaton747");
-            if(!is_null($scons)) {
-                $reply->data = $scons;
-            }else{
-                $reply->data= $scons;
-                //handle if scon is logged on but is no account is found.
-                //throw new InvalidArgumentException("Scon is not authorized",401);
-            }
-        }else{
-            //handle if user is not logged in and redirect them
-            echo "reached here";
+	$netId = $_SERVER['REDIRECT_REMOTE_USER'];
+	$netId = "deaton747";
+	    switch ($_GET['findMethod']){
+	        case "all":
+	            $scons = Scon::getAllScons($pdo);
+	            $reply->data = $scons;
+                break;
+            default:
+                if(!empty($netId)){
+                    $scons = Scon::getSconByNetId($pdo,"deaton747");
+                    if(!is_null($scons)) {
+                        $reply->data = $scons;
+                    }else{
+                        $reply->data= $scons;
+                        //handle if scon is logged on but is no account is found.
+                        //throw new InvalidArgumentException("Scon is not authorized",401);
+                    }
+                }else{
+                    //handle if user is not logged in and redirect them
+                    echo "reached here";
+                }
+                break;
         }
 
     }

@@ -6,9 +6,9 @@
  * Time: 9:58 AM
  */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/db/PdoGetter.php";
@@ -42,9 +42,16 @@ try{
                 $shiftPlanName = $_GET["shiftPlanName"];
                 $podId = $_GET["podId"];
                 $shifts = Shift::getShiftsByShiftPlanNameAndPodId($pdo,$shiftPlanName,$podId);
+                break;
+            case "shiftPlanName":
+                $shiftPlanName = $_GET["ShiftPlanName"];
+                $shifts = Shift::getShiftsByShiftPlanName($pdo,$shiftPlanName);
+                break;
             default:
-                $sconNetId = $_SERVER['REDIRECT_REMOTE_USER'];
-                $shifts = Shift::getShiftsBySconNetId($pdo,$sconNetId);
+                // uncomment this later
+                // $sconNetId = $_SERVER['REDIRECT_REMOTE_USER'];
+                $sconNetId = 'deaton747';
+                $shifts = Shift::getShiftsByShiftPlanName($pdo,"Summer2019");
                 break;
         }
 

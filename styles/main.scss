@@ -4,27 +4,27 @@ $darkgrey : #333333;
 $lobogray : #63666a;
 
 @font-face {
-  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseBlack.woff");
+  src: url("/sconsdocdev/styles/fonts/Lobo.woff");
   font-family: VitesseBlack;
 }
 
 @font-face {
-  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseBold.woff");
+  src: url("/sconsdocdev/styles/fonts/GothamBold.woff");
   font-family: VitesseBold;
 }
 
 @font-face {
-  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseMedium.woff");
+  src: url("/sconsdocdev/styles/fonts/GothamBold.woff");
   font-family: VitesseMedium;
 }
 
 @font-face {
-  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseLight.woff");
+  src: url("/sconsdocdev/styles/fonts/Lobo.woff");
   font-family: VitesseLight;
 }
 
 @font-face {
-  src: url("https://sconsdocdev.unm.edu/public_html/styles/fonts/VitesseMedium.woff");
+  src: url("/sconsdocdev/styles/fonts/Lobo.woff");
   font-family: VitesseMedium;
 }
 
@@ -52,11 +52,32 @@ nav{
 }
 
 #side-menu{
+  box-sizing: border-box;
+  padding-top: 2px;
   height: 101vh;
   position: fixed;
-  width : 0%;
+  width : 0;
   background-color: $cherry;
   transition: width .5s ;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px $darkgrey;
+
+  .side-menu-item{
+    border-bottom: solid white 2px;
+    height: 7.5vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h4{
+      justify-self: center;
+      margin: 0 !important;
+    }
+    &:first-child{
+      border-top: solid white 2px;
+    }
+  }
 }
 
 
@@ -70,13 +91,334 @@ nav{
   width : 85%;
 }
 
+.desktop-shift{
+  -webkit-transition: background-color .5s, color .25s;
+  -moz-transition: background-color .5s, color .25s;
+  -ms-transition: background-color .5s, color .25s;
+  -o-transition: background-color .5s, color .25s;
+  transition: background-color .5s, color .25s;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 7px 5px 5px lightgrey;
+  margin: 5px;
+
+  h4{
+      margin: 5px 0 0 0;
+    }
+
+  &:hover{
+    box-shadow: 5px 5px 5px $darkgrey;
+    background-color: $cherry !important;
+    color: white;
+  }
+}
+.normal-shift{
+  background-color: $silver;
+
+  &:nth-child(even){
+    background-color: rgba(186,12,47,.5);
+  }
+}
+
+.available-shift{
+  background-color: $darkgrey;
+  color: white !important;
+}
+
+#calendar-header-row{
+  height: 5vh;
+  text-align: center;
+}
+
+.calendar-full-size-column{
+  vertical-align: top;
+}
+.column-container{
+  width: 100%;
+}
+
+.calendar-full-size-half-column{
+  vertical-align: top;
+  width:40%;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#modal-main {
+  position:fixed;
+  background: white;
+  height: auto;
+  width: 40%;
+  top:35%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  .modal-header{
+    flex-direction: row;
+    text-align: center;
+    box-sizing: border-box;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    justify-self: end;
+    h4{
+      margin: 0;
+      display: inline-block;
+      font-family: VitesseBlack;
+      font-weight: 700;
+      color: $cherry;
+    }
+    button{
+      float: right;
+      background-color: white;
+      border: none;
+    }
+  }
+
+  .modal-title{
+    text-align: left;
+    box-sizing: border-box;
+    padding: 1vh 5vw 1vh 5vw;
+    font-family: VitesseBlack;
+
+    h1{
+      margin: 0;
+    }
+  }
+
+  .modal-content{
+    padding: 1vh 5vw;
+    box-sizing: border-box;
+    text-align: left;
+    font-family: VitesseMedium;
+    p{
+      margin: 1vh 0 1vh 0;
+    }
+
+    h3{
+      margin: 0;
+    }
+  }
+
+  #form-result{
+    box-sizing: border-box;
+    padding: 1vh 5vw 3vh 5vw;
+    display: flex;
+    flex-direction: column;
+    font-family: VitesseLight;
+    overflow: hidden;
+    transition: opacity .3s, height .3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    h2{
+      color: $cherry;
+    }
+
+    &.open{
+      opacity: 1;
+      height: auto;
+      text-align: center;
+    }
+    &.closed{
+      opacity: 0;
+      box-sizing: content-box;
+      height: 0;
+    }
+
+  }
+
+  form{
+    box-sizing: border-box;
+    padding: 1vh 5vw 3vh 5vw;
+    display: flex;
+    flex-direction: column;
+    font-family: VitesseLight;
+    overflow: hidden;
+    transition: opacity .3s, height .3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 
+    &.open{
+      opacity: 1;
+      height: auto;
+    }
+    &.closed{
+      opacity: 0;
+      box-sizing: content-box;
+      height: 0;
+    }
 
+    h2{
+      margin: 1vh 0 1vh 0;
+    }
 
+    label{
+      margin-top: 1vh;
+    }
+    input{
+      width: 100%;
+      margin-top: .5vh;
+      margin-bottom: 1vh;
+      background-color: lightgray;
+      color: $cherry;
+      font-family: VitesseMedium;
+      border: none;
+    }
 
+    .submitContainer{
+      width: 100%;
+      text-align: center;
+      button.close{
+        background-color: $lobogray;
+        margin-left: 0;
+        margin-right: 2vw;
+      }
+      button{
+        margin-top: 2vh;
+        font-family: VitesseMedium;
+        margin-left: 2vw;
+        background-color: $cherry;
+        box-sizing: border-box;
+        color: white;
+        padding: 5px 20px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+      }
+    }
 
+  }
 
+  .modal-footer{
+    display: flex;
 
+    button{
+      height: 5vh;
+      box-sizing: border-box;
+      color: white;
+      padding: 10px 20px;
+      width: 50%;
+      border: none;
+      font-family: VitesseMedium;
+      h3{
+        margin: 0;
+      }
+    }
 
+    button#giveaway{
+      background-color: $lobogray;
+    }
+
+    button#coverage{
+      background-color: $cherry;
+    }
+  }
+
+}
+
+@import 'scon';
+
+#flex-container{
+  display: flex;
+  flex-direction: row;
+
+  #make-schedule-form{
+    width: 50%;
+    text-align: center;
+    box-sizing: border-box;
+    label {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-family: Inter-Medium;
+      font-size: 16px;
+      display: block;
+    }
+
+    input.make{
+      font-family: Inter-Medium;
+      font-size: 12px;
+      box-sizing: border-box;
+      margin-top: 5px;
+      padding-top: 5px;
+    }
+    .timePicker{
+      box-sizing: border-box;
+      margin-top: 10px
+    }
+  }
+
+  #make-shift-container{
+    width: 50%;
+    box-sizing: border-box;
+
+    .draggable-shift{
+      -webkit-transition: background-color .5s, color .25s;
+      -moz-transition: background-color .5s, color .25s;
+      -ms-transition: background-color .5s, color .25s;
+      -o-transition: background-color .5s, color .25s;
+      transition: background-color .5s, color .25s;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-align: center;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 7px 5px 5px lightgrey;
+      margin: 5px;
+      width: 50%;
+      align-self: center;
+      justify-self: center;
+      background-color: $cherry;
+
+      h4{
+        margin: 5px 0 0 0;
+      }
+
+      &:hover{
+        box-shadow: 5px 5px 5px $darkgrey;
+        background-color: $cherry !important;
+        color: white;
+      }
+    }
+  }
+
+}
+
+.calendar-full-size-column-draggable{
+  vertical-align: top;
+  height: 40vh;
+
+  &:hover{
+    background-color: #ADD8E6;
+    opacity: .5;
+    height: 40vh;
+  }
+}
+
+.dragged-over{
+  background-color: #ADD8E6;
+  opacity: .5;
+  height: 40vh;
+}

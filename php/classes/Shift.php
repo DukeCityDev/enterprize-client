@@ -9,31 +9,37 @@
 namespace Unm\Scheduler;
 require_once dirname(__DIR__, 2) . "/php/classes/autoload.php";
 require_once(dirname(__DIR__, 2) . "/php/util/Util.php");
+require_once(dirname(__DIR__, 2) . "/php/classes/ShiftPlan.php");
 
+
+// TODO: REMEMBER I TOOKOUT SHIFT PLAN NAME IN CONSTRUCTOR!!!
 
 /**
  * Class Shift
  * @package Unm\Scheduler
+ * $row["shiftId"], $row["sconNetId"],$row["podId"], $newStartDate, $newEndDate, $row["available"],$row["shiftPlanId"])
  */
 class Shift implements \JsonSerializable
 {
     private $shiftId;
     private $sconNetId;
     private $podId;
-    private $shiftPlanName;
     private $startDate;
     private $endDate;
     private $available;
+    private $shiftPlanId;
 
-    public function __construct(?int $shiftId, ?string $sconNetId, int $podId, string $shiftPlanName, \DateTime $startDate, \DateTime $endDate, bool $available){
+    public function __construct(?int $shiftId, ?string $sconNetId, int $podId, \DateTime $startDate, \DateTime $endDate, bool $available, ?int $shiftPlanId){
         try{
             $this->setShiftId($shiftId);
             $this->setSconNetId($sconNetId);
             $this->setPodId($podId);
-            $this->setShiftPlanName($shiftPlanName);
             $this->setStartDate($startDate);
             $this->setEndDate($endDate);
             $this->setAvailable($available);
+            if(!is_null($shiftPlanId)){
+                $this->shiftPlanId = $shiftPlanId;
+            }
         } catch(\InvalidArgumentException $invalidArgument) {
             throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
         } catch(\RangeException $range) {
@@ -97,20 +103,6 @@ class Shift implements \JsonSerializable
 
     public function getPodId():int{
         return $this->podId;
-    }
-
-    public function setShiftPlanName(string $shiftPlanName):void{
-        if(strlen($shiftPlanName) < 5){
-            throw new \InvalidArgumentException("ShiftPlanName is Invalid: Less Than 10 Characters");
-        } else if(strlen($shiftPlanName) >= 20){
-            throw new \OutOfBoundsException("ShiftPlanName is Invalid: Maximum VARCHAR(20) Size Reached");
-        }
-
-        $this->shiftPlanName = $shiftPlanName;
-    }
-
-    public function getShiftPlanName():string{
-        return $this->shiftPlanName;
     }
 
     public function setStartDate( ?\DateTime $date): void
@@ -239,10 +231,29 @@ class Shift implements \JsonSerializable
         return ($shift);
     }
 
+
+
     public static function getShiftsByShiftPlanName(\PDO $pdo, string $shiftPlanName){
-        $query = "SELECT shiftId, sconNetId, podId, shiftPlanName, startDate, endDate, available FROM shift WHERE shiftPlanName = :shiftPlanName";
+
+        $shiftPlanName = trim($shiftPlanName);
+        $query = "SELECT shiftPlanId, podId, startDate, endDate FROM shiftPlan WHERE shiftPlanName = :shiftPlanName";
         $statement = $pdo->prepare($query);
         $parameter = ["shiftPlanName"=>$shiftPlanName];
+        $statement->execute($parameter);
+        $shiftPlanId = 1;
+        $statement->setFetchMode(\PDO::FETCH_ASSOC);
+        while(($row = $statement->fetch()) !== false) {
+            try {
+                $shiftPlanId = $row["shiftPlanId"];
+            } catch(\Exception $exception) {
+                // if the row couldn't be converted, rethrow it
+                throw(new \PDOException($exception->getMessage(), 0, $exception));
+            }
+        }
+
+        $query = "SELECT shiftId, sconNetId, podId, startDate, endDate, available, shiftPlanId FROM shift WHERE shiftPlanId = :shiftPlanName";
+        $statement = $pdo->prepare($query);
+        $parameter = ["shiftPlanName"=>$shiftPlanId];
         $statement->execute($parameter);
 
         $allShifts = new \SplFixedArray($statement->rowCount());
@@ -251,7 +262,8 @@ class Shift implements \JsonSerializable
             try {
                 $newStartDate = new \DateTime($row["startDate"]);
                 $newEndDate = new \DateTime($row["endDate"]);
-                $shift = new Shift($row["shiftId"], $row["sconNetId"],$row["podId"],$row["shiftPlanName"], $newStartDate, $newEndDate, $row["available"]);
+
+                $shift = new Shift($row["shiftId"], $row["sconNetId"],$row["podId"], $newStartDate, $newEndDate, $row["available"], $row["shiftPlanId"]);
                 $allShifts[$allShifts->key()] = $shift;
                 $allShifts->next();
             } catch(\Exception $exception) {
@@ -264,7 +276,8 @@ class Shift implements \JsonSerializable
 
     public static function getShiftsBySconNetId(\PDO $pdo, string $sconNetId){
         $sconNetId = trim($sconNetId);
-        $query = "SELECT shiftId, sconNetId, podId, shiftPlanName, startDate, endDate, available FROM shift WHERE sconNetId = :sconNetId";
+        $query = "SELECT shiftId, sconNetId, podId, startDate, endDate, available FROM shift WHERE sconNetId = :sconNetId";
+
         $statement = $pdo->prepare($query);
         $parameter = ["sconNetId"=>$sconNetId];
         $statement->execute($parameter);
@@ -275,7 +288,7 @@ class Shift implements \JsonSerializable
             try {
                 $newStartDate = new \DateTime($row["startDate"]);
                 $newEndDate = new \DateTime($row["endDate"]);
-                $shift = new Shift($row["shiftId"], $row["sconNetId"],$row["podId"],$row["shiftPlanName"], $newStartDate, $newEndDate, $row["available"]);
+                $shift = new Shift($row["shiftId"], $row["sconNetId"], $row["podId"], $newStartDate, $newEndDate, $row["available"]);
                 $allShifts[$allShifts->key()] = $shift;
                 $allShifts->next();
             } catch(\Exception $exception) {
@@ -333,7 +346,7 @@ class Shift implements \JsonSerializable
     }
 
     public function jsonSerialize() {
-        $fields = ["shiftId"=>$this->shiftId, "sconNetId"=> $this->sconNetId, "podId"=>$this->podId,"shiftPlanName"=>$this->shiftPlanName,"startDate"=>$this->startDate,"endDate"=>$this->endDate,"available"=>$this->available];
+        $fields = ["shiftId"=>$this->shiftId, "sconNetId"=> $this->sconNetId, "podId"=>$this->podId, "startDate"=>$this->startDate,"endDate"=>$this->endDate,"available"=>$this->available];
         return ($fields);
     }
 

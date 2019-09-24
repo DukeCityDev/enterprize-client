@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Scon} from "../Home";
+import {Scon} from "../../interfaces";
 
 interface Props{
     handleMenuClick(),
